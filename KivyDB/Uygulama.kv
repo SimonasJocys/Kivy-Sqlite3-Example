@@ -1,0 +1,165 @@
+#-*-coding: utf-8 -*-"
+#:import Label kivy.uix.label.Label
+#:import SimpleListAdapter kivy.adapters.simplelistadapter.SimpleListAdapter
+<Button>:
+    size_hint:1,None
+    background_normal:"btn.jpeg"
+
+<Modal>:
+    size_hint:0.5,0.5
+    canvas.before:
+        Rectangle:
+            pos:self.pos
+            size:self.size
+            source:'arka.jpeg'
+    BoxLayout:
+        orientation:"vertical"
+        Label:
+            text:root.labeltext
+            canvas.before:
+                Rectangle:
+                    pos:self.pos
+                    size:self.size
+                    source:'arka.jpeg'
+        Button:
+            text:"Kapat"
+            on_press:root.dismiss()
+            size_hint:1,0.3
+<Main>:
+    Anasayfa:
+        name:"anasayfa"
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'arka.jpeg'
+        BoxLayout:
+            orientation:"vertical"
+            Image:
+                source:"db.png"
+            Button:
+                size_hint:1,None
+                text:"Veri ekle"
+                on_press:app.ekranlar("ekle")
+            Button:
+                size_hint:1,None
+                text:"Veri Göster"
+                on_press:app.ekranlar("goster")
+            Button:
+                size_hint:1,None
+                text:"Veri Güncelle"
+                on_press:app.ekranlar("guncel")
+            Button:
+                size_hint:1,None
+                text:"Veri Sil"
+                on_press:app.ekranlar("sil")
+    Ekle:
+        name:"ekle"
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'arka.jpeg'
+        BoxLayout:
+            orientation:"vertical"
+            spacing:10
+            padding:5
+            Label:
+                text:"Ad"
+            TextInput:
+                size_hint:1,0.3
+                multiline:False
+                id:txtad
+            BoxLayout:
+                Button:
+                    size_hint:0.5,None
+                    text:"Kaydet"
+                    on_press:app.islem()
+                Button:
+                    size_hint:0.5,None
+                    text:"Geri Dön"
+                    on_press:app.ekranlar("anasayfa")
+    Goster:
+        name:"egoster"
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'arka.jpeg'
+        BoxLayout:
+            orientation:"vertical"
+            ListView:
+                id:listg
+                adapter:
+                    SimpleListAdapter(data=[],
+                    cls=Label)
+            Button:
+                text:"Göster"
+                on_press:app.listele()
+                size_hint:1,None
+            Button:
+                size_hint:1,None
+                text:"Geri Dön"
+                on_press:app.ekranlar("anasayfa")
+    Guncel:
+        name:"guncele"
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'arka.jpeg'
+        BoxLayout:
+            orientation:"vertical"
+            spacing:10
+            padding:5
+            Label:
+                text:"Veri id"
+            TextInput:
+                size_hint:1,0.3
+                multiline:False
+                id:txtno
+            BoxLayout:
+                orientation:"vertical"
+                Label:
+                    text:"Yeni değer"
+                TextInput:
+                    size_hint:1,0.3
+                    multiline:False
+                    id:txtname
+
+            BoxLayout:
+                Button:
+                    size_hint:0.5,None
+                    text:"Güncelle"
+                    on_press:app.update()
+                Button:
+                    size_hint:0.5,None
+                    text:"Geri Dön"
+                    on_press:app.ekranlar("anasayfa")
+    Delete:
+        name:"delete"
+        canvas.before:
+            Rectangle:
+                pos:self.pos
+                size:self.size
+                source:'arka.jpeg'
+        BoxLayout:
+            orientation:"vertical"
+            spacing:10
+            padding:5
+            Label:
+                text:"Veri İd"
+            TextInput:
+                id:txtdno
+                multiline:False
+                size_hint:1,0.3
+            BoxLayout:
+                orientation:"vertical"
+                Button:
+                    size_hint:1,None
+                    text:"Sil"
+                    on_press:app.delete()
+                Button:
+                    size_hint:1,None
+                    text:"Geri Dön"
+                    on_press:app.ekranlar("anasayfa")
